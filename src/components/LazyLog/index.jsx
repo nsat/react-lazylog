@@ -515,6 +515,38 @@ export default class LazyLog extends Component {
     }
   };
 
+  handleShiftEnterPressed = () => {
+    const {
+      resultLines,
+      scrollToLine,
+      currentResultsPosition,
+      isFilteringLinesWithMatches,
+    } = this.state;
+
+    if (!this.props.searchLikeBrowser) {
+      this.handleFilterLinesWithMatches(!isFilteringLinesWithMatches);
+    }
+
+    // If we have search results
+    if (resultLines) {
+      // If we already scrolled to a line
+      if (scrollToLine) {
+        // Scroll to the previous line if possible,
+        // wrap to the bottom if we're at the top.
+
+        if (currentResultsPosition - 1 >= 0) {
+          this.handleScrollToLine(resultLines[currentResultsPosition - 1]);
+          this.setState({ currentResultsPosition: currentResultsPosition - 1 });
+
+          return;
+        }
+      }
+
+      this.handleScrollToLine(resultLines[resultLines.length - 1]);
+      this.setState({ currentResultsPosition: resultLines.length - 1 });
+    }
+  };
+
   handleSearch = keywords => {
     const { resultLines, searchKeywords } = this.state;
     const { caseInsensitive, stream, websocket } = this.props;
@@ -779,6 +811,7 @@ export default class LazyLog extends Component {
             disabled={count === 0}
             captureHotkeys={this.props.captureHotkeys}
             onEnter={this.handleEnterPressed}
+            onShiftEnter={this.handleShiftEnterPressed}
           />
         )}
         <AutoSizer

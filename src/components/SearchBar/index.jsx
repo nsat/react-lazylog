@@ -46,9 +46,12 @@ export default class SearchBar extends Component {
     captureHotkeys: bool,
     /**
      * Exectues a function when enter is pressed.
-     * Defaults to turning the filter on and off.
      */
     onEnter: func,
+    /**
+     * Exectues a function when shift + enter is pressed.
+     */
+    onShiftEnter: func,
   };
 
   static defaultProps = {
@@ -82,7 +85,11 @@ export default class SearchBar extends Component {
 
   handleKeyPress = e => {
     if (e.key === 'Enter') {
-      this.props.onEnter();
+      if (e.shiftKey) {
+        this.props.onShiftEnter();
+      } else {
+        this.props.onEnter();
+      }
     } else if (this.props.captureHotkeys) {
       this.handleSearchHotkey(e);
     }
@@ -106,6 +113,15 @@ export default class SearchBar extends Component {
     } else {
       onClearSearch();
     }
+  };
+
+  handleSearchHotkey = e => {
+    if (!this.inputRef.current) {
+      return;
+    }
+
+    e.preventDefault();
+    this.inputRef.current.focus();
   };
 
   componentDidMount() {
