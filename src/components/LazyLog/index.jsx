@@ -187,6 +187,12 @@ export default class LazyLog extends Component {
      * etc.)
      */
     captureHotkeys: bool,
+    /**
+     * If true, search like a browser search - enter jumps to the next line
+     * with the searched term, shift goes backwards.
+     * Defaults to false, which causes enter to filter results instead.
+     */
+    searchLikeBrowser: bool,
   };
 
   static defaultProps = {
@@ -219,6 +225,7 @@ export default class LazyLog extends Component {
     highlightLineClassName: '',
     caseInsensitive: false,
     captureHotkeys: false,
+    searchLikeBrowser: false,
   };
 
   static getDerivedStateFromProps(
@@ -476,6 +483,29 @@ export default class LazyLog extends Component {
     });
   }
 
+  handleEnterPressed = () => {
+    const { resultLines, scrollToLine, currentResultsPosition } = this.state;
+
+    // If we have search results
+    if (resultLines) {
+      // If we already scrolled to a line
+      if (scrollToLine) {
+        // Scroll to the next line if possible,
+        // wrap to the top if we're at the end.
+
+        if (currentResultsPosition + 1 < resultLines.length) {
+          this.handleScrollToLine(resultLines[currentResultsPosition + 1]);
+          this.setState({ currentResultsPosition: currentResultsPosition + 1 });
+
+          return;
+        }
+      }
+
+      this.handleScrollToLine(resultLines[0]);
+      this.setState({ currentResultsPosition: 0 });
+    }
+  };
+
   handleSearch = keywords => {
     const { resultLines, searchKeywords } = this.state;
     const { caseInsensitive, stream, websocket } = this.props;
@@ -489,6 +519,7 @@ export default class LazyLog extends Component {
         resultLines: currentResultLines,
         isSearching: true,
         searchKeywords: keywords,
+        currentResultsPosition: 0,
       },
       this.filterLinesWithMatches
     );
@@ -511,6 +542,7 @@ export default class LazyLog extends Component {
       resultLineUniqueIndexes: [],
       isFilteringLinesWithMatches: this.state.isFilteringLinesWithMatches,
       scrollToIndex: 0,
+      currentResultsPosition: 0,
     });
   };
 
@@ -737,6 +769,7 @@ export default class LazyLog extends Component {
             resultsCount={resultLines.length}
             disabled={count === 0}
             captureHotkeys={this.props.captureHotkeys}
+            onEnter={this.handleEnterPressed}
           />
         )}
         <AutoSizer
@@ -754,6 +787,7 @@ export default class LazyLog extends Component {
               height={this.calculateListHeight(height)}
               width={this.props.width === 'auto' ? width : this.props.width}
               scrollToIndex={this.state.scrollToIndex}
+              scrollToAlignment="start"
             />
           )}
         </AutoSizer>

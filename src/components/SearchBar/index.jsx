@@ -44,6 +44,11 @@ export default class SearchBar extends Component {
      * etc.)
      */
     captureHotkeys: bool,
+    /**
+     * Exectues a function when enter is pressed.
+     * Defaults to turning the filter on and off.
+     */
+    onEnter: func,
   };
 
   static defaultProps = {
@@ -75,10 +80,22 @@ export default class SearchBar extends Component {
     this.setState({ keywords }, () => this.search());
   };
 
-  handleSearchKeyPress = e => {
+  handleKeyPress = e => {
     if (e.key === 'Enter') {
-      this.handleFilterToggle();
+      // this.handleFilterToggle();
+      this.props.onEnter();
+    } else if (this.props.captureHotkeys) {
+      this.handleSearchHotkey(e);
     }
+  };
+
+  handleSearchHotkey = e => {
+    if (!this.inputRef.current) {
+      return;
+    }
+
+    e.preventDefault();
+    this.inputRef.current.focus();
   };
 
   search = () => {
@@ -90,15 +107,6 @@ export default class SearchBar extends Component {
     } else {
       onClearSearch();
     }
-  };
-
-  handleSearchHotkey = e => {
-    if (!this.inputRef.current) {
-      return;
-    }
-
-    e.preventDefault();
-    this.inputRef.current.focus();
   };
 
   componentDidMount() {
@@ -121,7 +129,7 @@ export default class SearchBar extends Component {
           placeholder="Search"
           className={`react-lazylog-searchbar-input ${searchInput}`}
           onChange={this.handleSearchChange}
-          onKeyPress={this.handleSearchKeyPress}
+          onKeyPress={this.handleKeyPress}
           value={this.state.keywords}
           disabled={disabled}
           ref={this.inputRef}
