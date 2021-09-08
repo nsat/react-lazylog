@@ -115,15 +115,6 @@ export default class SearchBar extends Component {
     }
   };
 
-  handleSearchHotkey = e => {
-    if (!this.inputRef.current) {
-      return;
-    }
-
-    e.preventDefault();
-    this.inputRef.current.focus();
-  };
-
   componentDidMount() {
     if (this.props.captureHotkeys) {
       hotkeys('ctrl+f,cmd+f', this.handleSearchHotkey);
@@ -154,7 +145,8 @@ export default class SearchBar extends Component {
           className={`react-lazylog-searchbar-filter ${
             filterActive ? 'active' : 'inactive'
           } ${button} ${filterIcon}`}
-          onClick={this.handleFilterToggle}>
+          onKeyPress={this.handleKeyPress}
+          onMouseUp={this.handleFilterToggle}>
           <FilterLinesIcon />
         </button>
         <span
