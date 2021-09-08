@@ -189,8 +189,8 @@ export default class LazyLog extends Component {
     captureHotkeys: bool,
     /**
      * If true, search like a browser search - enter jumps to the next line
-     * with the searched term, shift goes backwards.
-     * Defaults to false, which causes enter to filter results instead.
+     * with the searched term, shift + enter goes backwards.
+     * Defaults to false, which causes enter to toggle the filter instead.
      */
     searchLikeBrowser: bool,
   };
@@ -484,7 +484,16 @@ export default class LazyLog extends Component {
   }
 
   handleEnterPressed = () => {
-    const { resultLines, scrollToLine, currentResultsPosition } = this.state;
+    const {
+      resultLines,
+      scrollToLine,
+      currentResultsPosition,
+      isFilteringLinesWithMatches,
+    } = this.state;
+
+    if (!this.props.searchLikeBrowser) {
+      this.handleFilterLinesWithMatches(!isFilteringLinesWithMatches);
+    }
 
     // If we have search results
     if (resultLines) {

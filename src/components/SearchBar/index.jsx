@@ -70,10 +70,6 @@ export default class SearchBar extends Component {
     this.inputRef = createRef();
   }
 
-  handleFilterToggle = () => {
-    this.props.onFilterLinesWithMatches(!this.props.filterActive);
-  };
-
   handleSearchChange = e => {
     const { value: keywords } = e.target;
 
@@ -82,7 +78,6 @@ export default class SearchBar extends Component {
 
   handleKeyPress = e => {
     if (e.key === 'Enter') {
-      // this.handleFilterToggle();
       this.props.onEnter();
     } else if (this.props.captureHotkeys) {
       this.handleSearchHotkey(e);
