@@ -465,6 +465,17 @@ export default class LazyLog extends Component {
     });
   };
 
+  handleScrollToLine(scrollToLine = 0) {
+    const scrollToIndex = getScrollIndex({
+      scrollToLine,
+    });
+
+    this.setState({
+      scrollToIndex,
+      scrollToLine,
+    });
+  }
+
   handleSearch = keywords => {
     const { resultLines, searchKeywords } = this.state;
     const { caseInsensitive, stream, websocket } = this.props;
