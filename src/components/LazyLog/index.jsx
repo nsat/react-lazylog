@@ -29,7 +29,11 @@ import request from '../../request';
 import stream from '../../stream';
 import websocket from '../../websocket';
 import { searchLines } from '../../search';
-import { lazyLog, searchMatch } from './index.module.css';
+import {
+  lazyLog,
+  searchMatch,
+  searchMatchHighlighted,
+} from './index.module.css';
 
 // Setting a hard limit on lines since browsers have trouble with heights
 // starting at around 16.7 million pixels and up
@@ -493,6 +497,8 @@ export default class LazyLog extends Component {
 
     if (!this.props.searchLikeBrowser) {
       this.handleFilterLinesWithMatches(!isFilteringLinesWithMatches);
+
+      return;
     }
 
     // If we have search results
@@ -525,6 +531,8 @@ export default class LazyLog extends Component {
 
     if (!this.props.searchLikeBrowser) {
       this.handleFilterLinesWithMatches(!isFilteringLinesWithMatches);
+
+      return;
     }
 
     // If we have search results
@@ -615,10 +623,54 @@ export default class LazyLog extends Component {
     }
   };
 
-  handleFormatPart = () => {
-    const { isSearching, searchKeywords } = this.state;
+  handleFormatPart = lineNumber => {
+    const {
+      isSearching,
+      searchKeywords,
+      resultLines,
+      currentResultsPosition,
+    } = this.state;
+    const { searchLikeBrowser } = this.props;
 
     if (isSearching) {
+      // If browser-search has started and we're on the line
+      // that has the search term that is selected
+      if (
+        searchLikeBrowser &&
+        resultLines &&
+        currentResultsPosition !== undefined &&
+        resultLines[currentResultsPosition] === lineNumber
+      ) {
+        // This finds which word in the line should be the highlighted one.
+        // For example, if we should be highlighting the 2nd match on line 18,
+        // this would set locationInLine to 2.
+        let locationInLine = 0;
+
+        for (let i = 0; i < currentResultsPosition + 1; i += 1) {
+          if (resultLines[i] === lineNumber) {
+            locationInLine += 1;
+          }
+        }
+
+        return searchFormatPart({
+          searchKeywords,
+          formatPart: this.props.formatPart,
+          caseInsensitive: this.props.caseInsensitive,
+          replaceJsx: (text, key) => (
+            <span key={key} className={searchMatch}>
+              {text}
+            </span>
+          ),
+          selectedLine: true,
+          replaceJsxHighlight: (text, key) => (
+            <span key={key} className={searchMatchHighlighted}>
+              {text}
+            </span>
+          ),
+          highlightedWordLocation: locationInLine,
+        });
+      }
+
       return searchFormatPart({
         searchKeywords,
         formatPart: this.props.formatPart,
@@ -727,6 +779,7 @@ export default class LazyLog extends Component {
     const number = isFilteringLinesWithMatches
       ? resultLineUniqueIndexes[index]
       : index + 1 + offset;
+    const data = ansiparse(decode(linesToRender.get(index)));
 
     return (
       <Line
@@ -736,7 +789,7 @@ export default class LazyLog extends Component {
         style={style}
         key={key}
         number={number}
-        formatPart={this.handleFormatPart()}
+        formatPart={this.handleFormatPart(number, data)}
         selectable={selectableLines}
         highlight={highlight.includes(number)}
         onLineNumberClick={this.handleHighlight}
