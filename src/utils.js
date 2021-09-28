@@ -133,7 +133,13 @@ export const searchFormatPart = ({
     formattedPart = nextFormatPart(part);
   }
 
-  const exp = new RegExp(`(?=${searchKeywords})`);
+  // Escape out regex characters so they're treated as normal
+  // characters when we use regex to search for them.
+  const regexKeywords = searchKeywords.replace(
+    /[-[\]{}()*+?.,\\^$|#\s]/g,
+    '\\$&'
+  );
+  const exp = new RegExp(`(?=${regexKeywords})`);
   const splitParts = part.split(exp);
   // This deals with the special highlighting that occurs when a
   // line is selected  using the browser search
