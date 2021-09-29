@@ -90,8 +90,6 @@ export default class SearchBar extends Component {
       } else {
         this.props.onEnter();
       }
-    } else if (this.props.captureHotkeys) {
-      this.handleSearchHotkey(e);
     }
   };
 
@@ -116,8 +114,8 @@ export default class SearchBar extends Component {
   };
 
   componentDidMount() {
-    if (this.props.captureHotkeys) {
-      hotkeys('ctrl+f,cmd+f', this.handleSearchHotkey);
+    if (this.props.captureHotKeys) {
+      hotkeys('ctrl+f,command+f', this.handleSearchHotkey);
     }
   }
 
