@@ -43,7 +43,7 @@ export default class SearchBar extends Component {
      * If true, capture system hotkeys for searching the page (Cmd-F, Ctrl-F,
      * etc.)
      */
-    captureHotkeys: bool,
+    captureHotKeys: bool,
     /**
      * Exectues a function when enter is pressed.
      */
@@ -61,7 +61,7 @@ export default class SearchBar extends Component {
     resultsCount: 0,
     filterActive: false,
     disabled: false,
-    captureHotkeys: false,
+    captureHotKeys: false,
   };
 
   state = {

@@ -190,7 +190,7 @@ export default class LazyLog extends Component {
      * If true, capture system hotkeys for searching the page (Cmd-F, Ctrl-F,
      * etc.)
      */
-    captureHotkeys: bool,
+    captureHotKeys: bool,
     /**
      * If true, search like a browser search - enter jumps to the next line
      * with the searched term, shift + enter goes backwards.
@@ -228,7 +228,7 @@ export default class LazyLog extends Component {
     lineClassName: '',
     highlightLineClassName: '',
     caseInsensitive: false,
-    captureHotkeys: false,
+    captureHotKeys: false,
     searchLikeBrowser: false,
   };
 
@@ -862,7 +862,7 @@ export default class LazyLog extends Component {
             onFilterLinesWithMatches={this.handleFilterLinesWithMatches}
             resultsCount={resultLines.length}
             disabled={count === 0}
-            captureHotkeys={this.props.captureHotkeys}
+            captureHotKeys={this.props.captureHotKeys}
             onEnter={this.handleEnterPressed}
             onShiftEnter={this.handleShiftEnterPressed}
           />
