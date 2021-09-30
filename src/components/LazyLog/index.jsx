@@ -522,16 +522,9 @@ export default class LazyLog extends Component {
   };
 
   handleShiftEnterPressed = () => {
-    const {
-      resultLines,
-      scrollToLine,
-      currentResultsPosition,
-      isFilteringLinesWithMatches,
-    } = this.state;
+    const { resultLines, scrollToLine, currentResultsPosition } = this.state;
 
     if (!this.props.searchLikeBrowser) {
-      this.handleFilterLinesWithMatches(!isFilteringLinesWithMatches);
-
       return;
     }
 
