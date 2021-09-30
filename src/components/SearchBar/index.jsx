@@ -11,6 +11,7 @@ import {
   button,
   active,
   inactive,
+  clickable,
 } from './index.module.css';
 
 export default class SearchBar extends Component {
@@ -169,7 +170,7 @@ export default class SearchBar extends Component {
           disabled={disabled}
           className={`react-lazylog-searchbar-filter ${
             filterActive ? 'active' : 'inactive'
-          } ${button} ${filterIcon}`}
+          } ${button} ${filterIcon} ${clickable}`}
           onKeyPress={this.handleKeyPress}
           onMouseUp={this.handleFilterToggle}>
           <FilterLinesIcon />
@@ -179,7 +180,7 @@ export default class SearchBar extends Component {
             <button
               disabled={disabled}
               className={`react-lazylog-searchbar-up-arrow ${
-                resultsCount ? 'active' : 'inactive'
+                resultsCount ? `active ${clickable}` : 'inactive'
               } ${button} ${arrowIcon}`}
               onKeyPress={this.handleKeyPress}
               onMouseUp={onShiftEnter}>
@@ -188,7 +189,7 @@ export default class SearchBar extends Component {
             <button
               disabled={disabled}
               className={`react-lazylog-searchbar-down-arrow ${
-                resultsCount ? 'active' : 'inactive'
+                resultsCount ? `active ${clickable}` : 'inactive'
               } ${button} ${arrowIcon}`}
               onKeyPress={this.handleKeyPress}
               onMouseUp={onEnter}>
