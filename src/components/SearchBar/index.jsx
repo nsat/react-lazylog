@@ -1,7 +1,9 @@
-import { createRef, Component } from 'react';
+import { createRef, Component, Fragment } from 'react';
 import { bool, func, number } from 'prop-types';
 import hotkeys from 'hotkeys-js';
 import FilterLinesIcon from './FilterLinesIcon';
+import DownArrowIcon from './ArrowIcons/DownArrow';
+import UpArrowIcon from './ArrowIcons/UpArrow';
 import { SEARCH_MIN_KEYWORDS } from '../../utils';
 import {
   searchBar,
@@ -52,6 +54,20 @@ export default class SearchBar extends Component {
      * Exectues a function when shift + enter is pressed.
      */
     onShiftEnter: func,
+    /**
+     * If true, search like a browser search - enter jumps to the next line
+     * with the searched term, shift + enter goes backwards.
+     * Also adds up and down arrows to search bar to jump
+     * to the next and previous result.
+     * Defaults to false, which causes enter to toggle the filter instead.
+     */
+    searchLikeBrowser: bool,
+    /**
+     * The current result the browser search is highlighting.
+     * Only applicable if searchLikeBrowser is true.
+     * Defaults to 1.
+     */
+    currentResultsPosition: number,
   };
 
   static defaultProps = {
@@ -62,6 +78,7 @@ export default class SearchBar extends Component {
     filterActive: false,
     disabled: false,
     captureHotKeys: false,
+    currentResultsPosition: 0,
   };
 
   state = {
@@ -121,9 +138,18 @@ export default class SearchBar extends Component {
   }
 
   render() {
-    const { resultsCount, filterActive, disabled } = this.props;
+    const {
+      resultsCount,
+      filterActive,
+      disabled,
+      searchLikeBrowser,
+      currentResultsPosition,
+      onEnter,
+      onShiftEnter,
+    } = this.props;
     const matchesLabel = `match${resultsCount === 1 ? '' : 'es'}`;
     const filterIcon = filterActive ? active : inactive;
+    const arrowIcon = resultsCount ? active : inactive;
 
     return (
       <div className={`react-lazylog-searchbar ${searchBar}`}>
@@ -148,11 +174,36 @@ export default class SearchBar extends Component {
           onMouseUp={this.handleFilterToggle}>
           <FilterLinesIcon />
         </button>
+        {searchLikeBrowser && (
+          <Fragment>
+            <button
+              disabled={disabled}
+              className={`react-lazylog-searchbar-up-arrow ${
+                resultsCount ? 'active' : 'inactive'
+              } ${button} ${arrowIcon}`}
+              onKeyPress={this.handleKeyPress}
+              onMouseUp={onShiftEnter}>
+              <UpArrowIcon />
+            </button>
+            <button
+              disabled={disabled}
+              className={`react-lazylog-searchbar-down-arrow ${
+                resultsCount ? 'active' : 'inactive'
+              } ${button} ${arrowIcon}`}
+              onKeyPress={this.handleKeyPress}
+              onMouseUp={onEnter}>
+              <DownArrowIcon />
+            </button>
+          </Fragment>
+        )}
+
         <span
           className={`react-lazylog-searchbar-matches ${
             resultsCount ? 'active' : 'inactive'
           } ${resultsCount ? active : inactive}`}>
-          {resultsCount} {matchesLabel}
+          {searchLikeBrowser && resultsCount
+            ? `${currentResultsPosition + 1} of ${resultsCount} ${matchesLabel}`
+            : `${resultsCount} ${matchesLabel}`}
         </span>
       </div>
     );
