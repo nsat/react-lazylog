@@ -142,7 +142,7 @@ export const searchFormatPart = ({
   const exp = new RegExp(`(?=${regexKeywords})`);
   const splitParts = part.split(exp);
   // This deals with the special highlighting that occurs when a
-  // line is selected  using the browser search
+  // line is selected using the browser search
   const handleHighlighting = () => {
     // If this line is selected so we need to deal with special highlighting
     if (selectedLine) {

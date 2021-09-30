@@ -56,17 +56,16 @@ export default class SearchBar extends Component {
      */
     onShiftEnter: func,
     /**
-     * If true, search like a browser search - enter jumps to the next line
-     * with the searched term, shift + enter goes backwards.
-     * Also adds up and down arrows to search bar to jump
-     * to the next and previous result.
-     * Defaults to false, which causes enter to toggle the filter instead.
+     * If true, adds up and down arrows to search bar to jump
+     * to the next and previous result. The down arrow calls
+     * "onEnter" and the up arrow calls "onShiftEnter"
+     * Defaults to false, which does not add the arrows.
      */
     searchLikeBrowser: bool,
     /**
      * The current result the browser search is highlighting.
      * Only applicable if searchLikeBrowser is true.
-     * Defaults to 1.
+     * Defaults to 0.
      */
     currentResultsPosition: number,
   };
