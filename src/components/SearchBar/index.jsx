@@ -116,6 +116,7 @@ export default class SearchBar extends Component {
   componentDidMount() {
     if (this.props.captureHotKeys) {
       hotkeys('ctrl+f,command+f', this.handleSearchHotkey);
+      hotkeys.filter = () => true;
     }
   }
 
