@@ -187,8 +187,7 @@ export default class SearchBar extends Component {
               className={`react-lazylog-searchbar-up-arrow ${
                 resultsCount ? `active ${clickable}` : 'inactive'
               } ${button} ${arrowIcon}`}
-              onKeyPress={this.handleKeyPress}
-              onMouseUp={onShiftEnter}>
+              onClick={onShiftEnter}>
               <UpArrowIcon />
             </button>
             <button
@@ -196,8 +195,7 @@ export default class SearchBar extends Component {
               className={`react-lazylog-searchbar-down-arrow ${
                 resultsCount ? `active ${clickable}` : 'inactive'
               } ${button} ${arrowIcon}`}
-              onKeyPress={this.handleKeyPress}
-              onMouseUp={onEnter}>
+              onClick={onEnter}>
               <DownArrowIcon />
             </button>
           </Fragment>
