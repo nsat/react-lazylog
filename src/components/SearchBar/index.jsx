@@ -159,6 +159,15 @@ export default class SearchBar extends Component {
 
     return (
       <div className={`react-lazylog-searchbar ${searchBar}`}>
+        <span
+          className={`react-lazylog-searchbar-matches ${
+            resultsCount ? 'active' : 'inactive'
+          } ${resultsCount ? active : inactive}`}
+          style={{ marginRight: '10px' }}>
+          {searchLikeBrowser && resultsCount
+            ? `${currentResultsPosition + 1} of ${resultsCount} ${matchesLabel}`
+            : `${resultsCount} ${matchesLabel}`}
+        </span>
         <input
           autoComplete="off"
           type="text"
@@ -200,15 +209,6 @@ export default class SearchBar extends Component {
             </button>
           </Fragment>
         )}
-
-        <span
-          className={`react-lazylog-searchbar-matches ${
-            resultsCount ? 'active' : 'inactive'
-          } ${resultsCount ? active : inactive}`}>
-          {searchLikeBrowser && resultsCount
-            ? `${currentResultsPosition + 1} of ${resultsCount} ${matchesLabel}`
-            : `${resultsCount} ${matchesLabel}`}
-        </span>
       </div>
     );
   }
