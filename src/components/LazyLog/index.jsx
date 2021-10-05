@@ -196,7 +196,8 @@ export default class LazyLog extends Component {
      * with the searched term, shift + enter goes backwards.
      * Also adds up and down arrows to search bar to jump
      * to the next and previous result.
-     * Defaults to false, which causes enter to toggle the filter instead.
+     * If false, enter toggles the filter instead.
+     * Defaults to true.
      */
     searchLikeBrowser: bool,
   };
@@ -231,7 +232,7 @@ export default class LazyLog extends Component {
     highlightLineClassName: '',
     caseInsensitive: false,
     captureHotKeys: false,
-    searchLikeBrowser: false,
+    searchLikeBrowser: true,
   };
 
   static getDerivedStateFromProps(
