@@ -137,6 +137,12 @@ export default class SearchBar extends Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.props.captureHotKeys) {
+      hotkeys.deleteScope('all');
+    }
+  }
+
   render() {
     const {
       resultsCount,
