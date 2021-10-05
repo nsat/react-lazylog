@@ -25,6 +25,11 @@
   fill: #d6d6d6;
 }
 
+.clickable:hover {
+  border-radius: 5px;
+  background: #666666;
+}
+
 .inactive {
   color: #464646;
   fill: #464646;
@@ -34,4 +39,6 @@
   background: none;
   border: none;
   margin-right: 10px;
+  padding: 3px;
+  padding-bottom: 1px;
 }

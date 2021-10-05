@@ -114,6 +114,18 @@ export const searchFormatPart = ({
   nextFormatPart,
   caseInsensitive,
   replaceJsx,
+  // True if this is the line the browser search is highlighting
+  selectedLine,
+  replaceJsxHighlight,
+  /**
+   * highlightedWordLocation is a bit weird, it deals with
+   * the special highlighting of a searched term
+   * if it is the one the browser-like search is currently
+   * highlighting. This is to deal with the case where there are
+   * multiple instances of the searched term in the same line,
+   * to make sure the correct one is highlighted.
+   */
+  highlightedWordLocation,
 }) => part => {
   let formattedPart = part;
 
@@ -121,12 +133,58 @@ export const searchFormatPart = ({
     formattedPart = nextFormatPart(part);
   }
 
+  // Escape out regex characters so they're treated as normal
+  // characters when we use regex to search for them.
+  const regexKeywords = searchKeywords.replace(
+    /[-[\]{}()*+?.,\\^$|#\s]/g,
+    '\\$&'
+  );
+  const exp = new RegExp(`(?=${regexKeywords})`);
+  const splitParts = part.split(exp);
+  // This deals with the special highlighting that occurs when a
+  // line is selected using the browser search
+  const handleHighlighting = () => {
+    // If this line is selected so we need to deal with special highlighting
+    if (selectedLine) {
+      // This is the special case where the searched
+      // word is at the very start of the string
+      if (splitParts.length === 1) {
+        formattedPart = reactStringReplace(
+          formattedPart,
+          searchKeywords,
+          replaceJsxHighlight
+        );
+      } else {
+        // This highlights the special color
+        // if the word is selected, otherwise, just
+        // the regular matched search term color
+        formattedPart = splitParts.map((part, index) =>
+          reactStringReplace(
+            part,
+            searchKeywords,
+            index === highlightedWordLocation ? replaceJsxHighlight : replaceJsx
+          )
+        );
+      }
+    }
+    // Fianlly, just do regular highlighting since this line isn't selected
+    else {
+      formattedPart = reactStringReplace(
+        formattedPart,
+        searchKeywords,
+        replaceJsx
+      );
+    }
+
+    return formattedPart;
+  };
+
   if (caseInsensitive) {
     if (part.toLowerCase().includes(searchKeywords.toLowerCase())) {
-      return reactStringReplace(formattedPart, searchKeywords, replaceJsx);
+      formattedPart = handleHighlighting();
     }
   } else if (part.includes(searchKeywords)) {
-    return reactStringReplace(formattedPart, searchKeywords, replaceJsx);
+    formattedPart = handleHighlighting();
   }
 
   return formattedPart;
