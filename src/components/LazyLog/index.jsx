@@ -637,12 +637,18 @@ export default class LazyLog extends Component {
         currentResultsPosition !== undefined &&
         resultLines[currentResultsPosition] === lineNumber
       ) {
+        let locationInLine = 0;
+        // Find the first occurance of the line number
+        // We use this to make sure we're only searching from where
+        // the line number first occurs to the currentResultsPosition below
+        const initialOccurance = resultLines.findIndex(
+          element => element === resultLines[currentResultsPosition]
+        );
+
         // This finds which word in the line should be the highlighted one.
         // For example, if we should be highlighting the 2nd match on line 18,
         // this would set locationInLine to 2.
-        let locationInLine = 0;
-
-        for (let i = 0; i < currentResultsPosition + 1; i += 1) {
+        for (let i = initialOccurance; i <= currentResultsPosition; i += 1) {
           if (resultLines[i] === lineNumber) {
             locationInLine += 1;
           }
