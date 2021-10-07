@@ -781,7 +781,6 @@ export default class LazyLog extends Component {
     const number = isFilteringLinesWithMatches
       ? resultLineUniqueIndexes[index]
       : index + 1 + offset;
-    const data = ansiparse(decode(linesToRender.get(index)));
 
     return (
       <Line
