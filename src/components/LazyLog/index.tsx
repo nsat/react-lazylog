@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { any, arrayOf, bool, func, number, object, oneOfType, string, shape } from "prop-types";
 import { AutoSizer, List as VirtualList } from "react-virtualized";
-import { List } from "immutable";
+import { List, Range } from "immutable";
 import ansiparse from "../../ansiparse";
 import { decode, encode } from "../../encoding";
 import {
@@ -250,9 +250,10 @@ export default class LazyLog extends Component<any, any> {
         return {
             scrollToIndex: newScrollToIndex,
             lineLimit: Math.floor(BROWSER_PIXEL_LIMIT / rowHeight),
-            highlight: highlight
-                ? getHighlightRange(highlight)
-                : previousHighlight || getHighlightRange(previousHighlight),
+            highlight:
+                previousHighlight === Range(0, 0)
+                    ? getHighlightRange(highlight)
+                    : previousHighlight || getHighlightRange(previousHighlight),
             ...(shouldUpdate
                 ? {
                       url: nextUrl,
