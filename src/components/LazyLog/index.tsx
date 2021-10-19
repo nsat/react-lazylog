@@ -426,8 +426,6 @@ export default class LazyLog extends Component<any, any> {
         const first = this.state.highlight.first();
         const last = this.state.highlight.last();
         let range;
-        // console.log(first);
-        console.log(enableMultilineHighlight);
 
         if (first === lineNumber) {
             range = null;
