@@ -25,7 +25,7 @@
     "@typescript-eslint/parser": "^4.29.3",
     "babel-polyfill": "^6.26.0",
     "css-loader": "^3.3.0",
-    "eslint": "^6.8.0",
+    "eslint": "^8.1.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-prettier": "^3.1.2",
@@ -33,9 +33,9 @@
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "ts-loader": "^6.2.0",
-    "webpack": "^4.41.2",
+    "webpack": "^5.60.0",
     "webpack-bundle-tracker": "^0.4.3",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^4.9.1"
   },
   "dependencies": {
     "typescript": "^4.0.3",
