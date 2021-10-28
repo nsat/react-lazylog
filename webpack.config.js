@@ -1,6 +1,7 @@
 "use strict";
 
 const path = require("path");
+const webpack = require('webpack')
 
 module.exports = () => {
     return {
@@ -18,6 +19,12 @@ module.exports = () => {
             extensions: [".ts", ".tsx", ".js", ".jsx"],
         },
         devtool: "source-map",
+        plugins: [
+          // fix "process is not defined" error:
+          new webpack.ProvidePlugin({
+            process: 'process/browser',
+          }),
+        ],
         module: {
             rules: [
                 {
@@ -40,27 +47,6 @@ module.exports = () => {
                     test: /\.tsx?$/,
                     use: "ts-loader",
                     exclude: /node_modules/,
-                },
-                {
-                    test: /\.(jsx|js)$/,
-                    include: path.resolve(__dirname, "src"),
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: "babel-loader",
-                            options: {
-                                presets: [
-                                    [
-                                        "@babel/preset-env",
-                                        {
-                                            targets: "defaults",
-                                        },
-                                    ],
-                                    "@babel/preset-react",
-                                ],
-                            },
-                        },
-                    ],
                 },
             ],
         },
