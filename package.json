@@ -1,0 +1,54 @@
+{
+  "name": "react-lazylog",
+  "version": "4.5.3",
+  "description": "React Lazy Logviewer (Spire)",
+  "license": "MPL-2.0",
+  "repository": "nsat/react-lazylog",
+  "main": "build/index.js",
+  "files": [
+    "build",
+    "src"
+  ],
+  "keywords": [
+    "react",
+    "log",
+    "viewer",
+    "logviewer",
+    "lazy",
+    "lazylog"
+  ],
+  "scripts": {
+    "build": "webpack --progress"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
+    "babel-polyfill": "^6.26.0",
+    "css-loader": "^3.3.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^2.1.2",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "ts-loader": "^6.2.0",
+    "webpack": "^4.41.2",
+    "webpack-bundle-tracker": "^0.4.3",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "typescript": "^4.0.3",
+    "fetch-readablestream": "^0.2.0",
+    "immutable": "^3.8.2",
+    "mitt": "^1.1.2",
+    "prop-types": "^15.6.1",
+    "react-string-replace": "^0.4.1",
+    "react-virtualized": "^9.21.0",
+    "text-encoding-utf-8": "^1.0.1",
+    "whatwg-fetch": "^2.0.4"
+  },
+  "peerDependencies": {
+    "react": ">=16.3.0"
+  }
+}
