@@ -20,16 +20,6 @@ This fork is maintained by a team at [Spire Global, Inc.](https://github.com/nsa
 
 ## Getting started
 
-You can install `react-lazylog` via Yarn or npm:
-
-```bash
-# If using Yarn:
-yarn add react-lazylog
-
-# If using npm:
-npm install --save react-lazylog
-```
-
 The core component from react-lazylog is `LazyLog`. There is also a higher-order component (HOC) for
 following logs until scroll. This module can be required via ES imports, CommonJS require, or UMD.
 
