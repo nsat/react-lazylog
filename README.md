@@ -176,7 +176,3 @@ own `LinePart` and styled separately (colors, text formatting, etc.) from the re
     Open a browser to http://localhost:6060 to preview the React components.
 -   Use CTRL-C to exit the styleguide.
 -   Use `npm run build` to generate the compiled component for publishing to npm.
-
-Feel free to open an issue, submit a pull request, or contribute however you would like. Understand that this
-documentation is still a work in progress, so file an issue or submit a PR to ask questions or make improvements.
-Thanks!
