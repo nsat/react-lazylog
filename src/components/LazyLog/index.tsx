@@ -357,6 +357,7 @@ export default class LazyLog extends Component<any, any> {
         this.encodedLog = encodedLog;
         const { scrollToLine, follow, stream, websocket } = this.props;
         const { count: previousCount } = this.state;
+
         const offset = 0;
         const lines = (this.state.lines || List()).concat(moreLines);
         const count = lines.count();
