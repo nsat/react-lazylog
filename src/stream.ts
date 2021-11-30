@@ -23,7 +23,7 @@ export default (url, options) => {
     let overage = null;
     let encodedLog = new Uint8Array();
 
-    emitter.on("data", (data) => {
+    emitter.on("data", (data: ArrayBuffer) => {
         encodedLog = bufferConcat(encodedLog, new Uint8Array(data));
 
         const { lines, remaining } = convertBufferToLines(data, overage);
