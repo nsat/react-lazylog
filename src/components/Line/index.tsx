@@ -1,8 +1,10 @@
+import { arrayOf, bool, func, number, object, shape, string } from "prop-types";
+
+import React, { Component } from "react";
+
 import LineContent from "../LineContent";
 import LineNumber from "../LineNumber";
 import { line, lineHighlight, lineSelectable } from "./index.module.css";
-import { arrayOf, bool, func, number, object, shape, string } from "prop-types";
-import React, { Component } from "react";
 
 /**
  * A single row of content, containing both the line number

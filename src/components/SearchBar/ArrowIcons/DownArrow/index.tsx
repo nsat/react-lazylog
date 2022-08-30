@@ -1,5 +1,6 @@
-import { downArrowIcon } from "./index.module.css";
 import React, { PureComponent } from "react";
+
+import { downArrowIcon } from "./index.module.css";
 
 export default class DownArrowIcon extends PureComponent {
     render() {

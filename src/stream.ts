@@ -1,6 +1,7 @@
-import { bufferConcat, convertBufferToLines } from "./utils";
 import { List } from "immutable";
 import mitt from "mitt";
+
+import { bufferConcat, convertBufferToLines } from "./utils";
 
 const fetcher = Promise.resolve().then(() => self.fetch);
 

@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+import hotkeys from "hotkeys-js";
+import { bool, func, number } from "prop-types";
+
+import React, { Component, Fragment, createRef } from "react";
+
 import { SEARCH_MIN_KEYWORDS } from "../../utils";
 import DownArrowIcon from "./ArrowIcons/DownArrow";
 import UpArrowIcon from "./ArrowIcons/UpArrow";
 import FilterLinesIcon from "./FilterLinesIcon";
 import { active, button, clickable, inactive, searchBar, searchInput } from "./index.module.css";
-import hotkeys from "hotkeys-js";
-import { bool, func, number } from "prop-types";
-import React, { Component, Fragment, createRef } from "react";
 
 export default class SearchBar extends Component<any, any> {
     static propTypes = {

@@ -1,3 +1,9 @@
+import { List, Range } from "immutable";
+import { any, arrayOf, bool, func, number, object, oneOfType, shape, string } from "prop-types";
+
+import React, { Component, Fragment } from "react";
+import { AutoSizer, List as VirtualList } from "react-virtualized";
+
 import ansiparse from "../../ansiparse";
 import { decode, encode } from "../../encoding";
 import request from "../../request";
@@ -16,10 +22,6 @@ import Line from "../Line";
 import Loading from "../Loading";
 import SearchBar from "../SearchBar";
 import { lazyLog, searchMatch, searchMatchHighlighted } from "./index.module.css";
-import { List, Range } from "immutable";
-import { any, arrayOf, bool, func, number, object, oneOfType, shape, string } from "prop-types";
-import React, { Component, Fragment } from "react";
-import { AutoSizer, List as VirtualList } from "react-virtualized";
 
 export default class LazyLog extends Component<any, any> {
     static propTypes = {

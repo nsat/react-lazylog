@@ -1,5 +1,6 @@
-import { loading } from "./index.module.css";
 import React, { Component } from "react";
+
+import { loading } from "./index.module.css";
 
 /**
  * Just a loading spinner.

@@ -1,6 +1,8 @@
-import { lineNumber, lineNumberHighlight } from "./index.module.css";
 import { bool, func, number, object } from "prop-types";
+
 import React, { Component } from "react";
+
+import { lineNumber, lineNumberHighlight } from "./index.module.css";
 
 /**
  * The line number of a single line.
