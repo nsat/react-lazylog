@@ -279,6 +279,10 @@ export default class LazyLog extends Component<any, any> {
     encodedLog: any = undefined;
 
     componentDidMount() {
+        window.onbeforeunload = () => {
+            window.localStorage.removeItem("scrollToLine");
+        };
+        this.setState({ listRef: React.createRef() });
         this.request();
     }
 
@@ -828,6 +832,7 @@ export default class LazyLog extends Component<any, any> {
                 >
                     {({ height, width }) => (
                         <VirtualList
+                            ref={this.state.listRef}
                             className={`react-lazylog ${lazyLog}`}
                             rowCount={rowCount === 0 ? rowCount : rowCount + this.props.extraLines}
                             rowRenderer={(row) => this.renderRow(row)}
@@ -838,6 +843,17 @@ export default class LazyLog extends Component<any, any> {
                             width={this.props.width === "auto" ? width : this.props.width}
                             scrollToIndex={this.state.scrollToIndex}
                             scrollToAlignment="start"
+                            onScroll={() => {
+                                setTimeout(() => {
+                                    ![-1, 0, undefined].includes(
+                                        this.state.listRef?.current.Grid._renderedRowStartIndex,
+                                    ) &&
+                                        window.localStorage.setItem(
+                                            "scrollToLine",
+                                            this.state.listRef?.current.Grid._renderedRowStartIndex,
+                                        );
+                                }, 300);
+                            }}
                         />
                     )}
                 </AutoSizer>
