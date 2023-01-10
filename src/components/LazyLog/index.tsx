@@ -279,9 +279,6 @@ export default class LazyLog extends Component<any, any> {
     encodedLog: any = undefined;
 
     componentDidMount() {
-        window.onbeforeunload = () => {
-            window.localStorage.removeItem("scrollToLine");
-        };
         this.setState({ listRef: React.createRef() });
         this.request();
     }
@@ -293,6 +290,16 @@ export default class LazyLog extends Component<any, any> {
             prevProps.text !== this.props.text
         ) {
             this.request();
+        }
+
+        // Reset scroll position when there's new data, otherwise the screen goes blank for some reason
+        if (prevProps.text !== this.props.text && !this.props.follow && this.state.scrollTop > 0) {
+            const update = () => {
+                const newPosition = this.state.scrollTop;
+                this.state.listRef.current.scrollToPosition(newPosition);
+                this.state.listRef.current.forceUpdateGrid();
+            };
+            update();
         }
 
         if (!this.state.loaded && prevState.loaded !== this.state.loaded && this.props.onLoad) {
@@ -843,16 +850,8 @@ export default class LazyLog extends Component<any, any> {
                             width={this.props.width === "auto" ? width : this.props.width}
                             scrollToIndex={this.state.scrollToIndex}
                             scrollToAlignment="start"
-                            onScroll={() => {
-                                setTimeout(() => {
-                                    ![-1, 0, undefined].includes(
-                                        this.state.listRef?.current.Grid._renderedRowStartIndex,
-                                    ) &&
-                                        window.localStorage.setItem(
-                                            "scrollToLine",
-                                            this.state.listRef?.current.Grid._renderedRowStartIndex,
-                                        );
-                                }, 300);
+                            onScroll={({ scrollTop }) => {
+                                this.setState({ scrollTop });
                             }}
                         />
                     )}

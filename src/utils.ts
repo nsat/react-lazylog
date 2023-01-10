@@ -16,11 +16,8 @@ export const getScrollIndex = ({
     count = 0,
     offset = 0,
 }) => {
-    const prevLine = window.localStorage.getItem("scrollToLine");
     if (follow) {
         return count - 1 - offset;
-    } else if (typeof prevLine == "string") {
-        return parseInt(prevLine);
     } else if (scrollToLine && previousCount > scrollToLine) {
         return -1;
     } else if (scrollToLine) {
