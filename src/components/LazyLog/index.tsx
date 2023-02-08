@@ -197,6 +197,11 @@ export default class LazyLog extends Component<any, any> {
          * Defaults to null.
          */
         onLineNumberClick: func,
+        /**
+         * Called when a row is clicked.
+         * Currently used to open and close metadata.
+         */
+        onRowClick: func,
     };
 
     static defaultProps = {
@@ -232,6 +237,7 @@ export default class LazyLog extends Component<any, any> {
         captureHotKeys: false,
         searchLikeBrowser: true,
         onLineNumberClick: null,
+        onRowClick: null,
     };
 
     static getDerivedStateFromProps(
@@ -443,6 +449,7 @@ export default class LazyLog extends Component<any, any> {
         }
 
         const highlight = getHighlightRange(range);
+
         const state = { highlight };
 
         if (isFilteringLinesWithMatches) {
@@ -733,9 +740,16 @@ export default class LazyLog extends Component<any, any> {
         );
     }
 
-    renderRow = ({ key, index, style }) => {
-        const { rowHeight, selectableLines, lineClassName, highlightLineClassName, onLineNumberClick } =
-            this.props;
+    renderRow = (row) => {
+        const { key, index, style } = row;
+        const {
+            rowHeight,
+            selectableLines,
+            lineClassName,
+            highlightLineClassName,
+            onLineNumberClick,
+            onRowClick,
+        } = this.props;
         const {
             highlight,
             lines,
@@ -762,6 +776,7 @@ export default class LazyLog extends Component<any, any> {
                     const highlighted = this.handleHighlight(e);
                     onLineNumberClick?.({ lineNumber: number, highlightRange: highlighted });
                 }}
+                onRowClick={onRowClick?.(key)}
                 data={ansiparse(decode(linesToRender.get(index)))}
             />
         );

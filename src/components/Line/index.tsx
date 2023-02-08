@@ -67,7 +67,12 @@ export default class Line extends Component<any, any> {
         return (
             <div className={classes} style={lineStyle}>
                 <LineNumber number={number} highlight={highlight} onClick={onLineNumberClick} />
-                <LineContent number={number} onClick={onRowClick} formatPart={formatPart} data={data} />
+                <LineContent
+                    number={number}
+                    formatPart={formatPart}
+                    data={data}
+                    onClick={() => onRowClick()}
+                />
             </div>
         );
     }

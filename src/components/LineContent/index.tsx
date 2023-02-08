@@ -1,4 +1,4 @@
-import { arrayOf, func, number, object, shape, string } from "prop-types";
+import { arrayOf, func, number, shape, string } from "prop-types";
 
 import React, { Component } from "react";
 
@@ -33,16 +33,15 @@ export default class LineContent extends Component<any, any> {
          * return a new value to render for the part.
          */
         formatPart: func,
-        style: object,
+        onClick: func,
     };
 
     static defaultProps = {
         formatPart: null,
-        style: null,
     };
 
     render() {
-        const { data, formatPart, number, style } = this.props;
+        const { data, formatPart, number, onClick } = this.props;
 
         if (data) {
             const last = data[data.length - 1];
@@ -53,11 +52,14 @@ export default class LineContent extends Component<any, any> {
         }
 
         return (
-            <span className={lineContent} style={style}>
-                {data &&
-                    data.map((part, n) => (
-                        <LinePart part={part} format={formatPart} key={`line-${number}-${n}`} />
-                    ))}
+            <span
+                className={lineContent}
+                style={{ width: "100%", display: "inline-block" }}
+                onClick={onClick}
+            >
+                {data?.map((part, n) => (
+                    <LinePart part={part} format={formatPart} key={`line-${number}-${n}`} />
+                ))}
             </span>
         );
     }

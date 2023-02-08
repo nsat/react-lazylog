@@ -1,4 +1,4 @@
-import { func, object, shape, string } from "prop-types";
+import { func, shape, string } from "prop-types";
 
 import React, { Component } from "react";
 
@@ -51,7 +51,6 @@ export default class LinePart extends Component<any, any> {
          * return a new value to render for the part.
          */
         format: func,
-        style: object,
     };
 
     static defaultProps = {
@@ -60,10 +59,10 @@ export default class LinePart extends Component<any, any> {
     };
 
     render() {
-        const { format, part, style } = this.props;
+        const { format, part } = this.props;
 
         return (
-            <span className={getClassName(part)} style={style}>
+            <span className={getClassName(part)} style={{ width: "100%", display: "inline-block" }}>
                 {format ? format(part.text) : part.text}
             </span>
         );
