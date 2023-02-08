@@ -740,8 +740,7 @@ export default class LazyLog extends Component<any, any> {
         );
     }
 
-    renderRow = (row) => {
-        const { key, index, style } = row;
+    renderRow = ({ key, index, style }) => {
         const {
             rowHeight,
             selectableLines,
