@@ -24,7 +24,7 @@ export default class Line extends Component<any, any> {
         style: object,
         formatPart: func,
         onLineNumberClick: func,
-        onRowClick: func,
+        onMouseUp: func,
         className: string,
         highlightClassName: string,
     };
@@ -35,7 +35,7 @@ export default class Line extends Component<any, any> {
         style: {},
         formatPart: null,
         onLineNumberClick: null,
-        onRowClick: null,
+        onMouseUp: null,
         className: "",
         highlightClassName: "",
     };
@@ -47,7 +47,7 @@ export default class Line extends Component<any, any> {
             highlight,
             selectable,
             onLineNumberClick,
-            onRowClick,
+            onMouseUp,
             number,
             rowHeight,
             style,
@@ -67,12 +67,7 @@ export default class Line extends Component<any, any> {
         return (
             <div className={classes} style={lineStyle}>
                 <LineNumber number={number} highlight={highlight} onClick={onLineNumberClick} />
-                <LineContent
-                    number={number}
-                    formatPart={formatPart}
-                    data={data}
-                    onClick={() => onRowClick()}
-                />
+                <LineContent number={number} formatPart={formatPart} data={data} onMouseUp={onMouseUp} />
             </div>
         );
     }

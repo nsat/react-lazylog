@@ -201,7 +201,7 @@ export default class LazyLog extends Component<any, any> {
          * Called when a row is clicked.
          * Currently used to open and close metadata.
          */
-        onRowClick: func,
+        onMouseUp: func,
     };
 
     static defaultProps = {
@@ -237,7 +237,7 @@ export default class LazyLog extends Component<any, any> {
         captureHotKeys: false,
         searchLikeBrowser: true,
         onLineNumberClick: null,
-        onRowClick: null,
+        onMouseUp: null,
     };
 
     static getDerivedStateFromProps(
@@ -747,7 +747,7 @@ export default class LazyLog extends Component<any, any> {
             lineClassName,
             highlightLineClassName,
             onLineNumberClick,
-            onRowClick,
+            onMouseUp,
         } = this.props;
         const {
             highlight,
@@ -775,7 +775,7 @@ export default class LazyLog extends Component<any, any> {
                     const highlighted = this.handleHighlight(e);
                     onLineNumberClick?.({ lineNumber: number, highlightRange: highlighted });
                 }}
-                onRowClick={onRowClick?.(key)}
+                onMouseUp={onMouseUp?.(key)}
                 data={ansiparse(decode(linesToRender.get(index)))}
             />
         );

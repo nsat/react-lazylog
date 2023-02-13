@@ -33,7 +33,7 @@ export default class LineContent extends Component<any, any> {
          * return a new value to render for the part.
          */
         formatPart: func,
-        onClick: func,
+        onMouseUp: func,
     };
 
     static defaultProps = {
@@ -41,7 +41,7 @@ export default class LineContent extends Component<any, any> {
     };
 
     render() {
-        const { data, formatPart, number, onClick } = this.props;
+        const { data, formatPart, number, onMouseUp } = this.props;
 
         if (data) {
             const last = data[data.length - 1];
@@ -55,7 +55,7 @@ export default class LineContent extends Component<any, any> {
             <span
                 className={lineContent}
                 style={{ width: "100%", display: "inline-block" }}
-                onClick={onClick}
+                onMouseUp={onMouseUp}
             >
                 {data?.map((part, n) => (
                     <LinePart part={part} format={formatPart} key={`line-${number}-${n}`} />
