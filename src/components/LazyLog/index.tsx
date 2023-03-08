@@ -775,7 +775,7 @@ export default class LazyLog extends Component<any, any> {
                     const highlighted = this.handleHighlight(e);
                     onLineNumberClick?.({ lineNumber: number, highlightRange: highlighted });
                 }}
-                onMouseUp={onMouseUp?.(key)}
+                onMouseUp={onMouseUp?.(index + 1)}
                 data={ansiparse(decode(linesToRender.get(index)))}
             />
         );
