@@ -67,7 +67,13 @@ export default class Line extends Component<any, any> {
         return (
             <div className={classes} style={lineStyle}>
                 <LineNumber number={number} highlight={highlight} onClick={onLineNumberClick} />
-                <LineContent number={number} formatPart={formatPart} data={data} onMouseUp={onMouseUp} />
+                <LineContent
+                    number={number}
+                    formatPart={formatPart}
+                    data={data}
+                    onMouseUp={onMouseUp}
+                    style={{ width: "100%", display: "inline-block" }}
+                />
             </div>
         );
     }

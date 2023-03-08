@@ -51,6 +51,7 @@ export default class LinePart extends Component<any, any> {
          * return a new value to render for the part.
          */
         format: func,
+        style: {},
     };
 
     static defaultProps = {
@@ -59,10 +60,10 @@ export default class LinePart extends Component<any, any> {
     };
 
     render() {
-        const { format, part } = this.props;
+        const { format, part, style } = this.props;
 
         return (
-            <span className={getClassName(part)} style={{ width: "100%", display: "inline-block" }}>
+            <span className={getClassName(part)} style={style}>
                 {format ? format(part.text) : part.text}
             </span>
         );

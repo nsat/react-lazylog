@@ -34,6 +34,7 @@ export default class LineContent extends Component<any, any> {
          */
         formatPart: func,
         onMouseUp: func,
+        style: {},
     };
 
     static defaultProps = {
@@ -41,7 +42,7 @@ export default class LineContent extends Component<any, any> {
     };
 
     render() {
-        const { data, formatPart, number, onMouseUp } = this.props;
+        const { data, formatPart, number, onMouseUp, style } = this.props;
 
         if (data) {
             const last = data[data.length - 1];
@@ -52,13 +53,14 @@ export default class LineContent extends Component<any, any> {
         }
 
         return (
-            <span
-                className={lineContent}
-                style={{ width: "100%", display: "inline-block" }}
-                onMouseUp={onMouseUp}
-            >
+            <span className={lineContent} style={style} onMouseUp={onMouseUp}>
                 {data?.map((part, n) => (
-                    <LinePart part={part} format={formatPart} key={`line-${number}-${n}`} />
+                    <LinePart
+                        part={part}
+                        format={formatPart}
+                        key={`line-${number}-${n}`}
+                        style={{ width: "100%", display: "inline-block" }}
+                    />
                 ))}
             </span>
         );
