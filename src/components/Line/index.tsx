@@ -63,11 +63,18 @@ export default class Line extends Component<any, any> {
             minWidth: style ? style.width || "100%" : "100%",
             width: null,
         };
+        const contentStyle = { width: "100%", display: "inline-block" };
 
         return (
             <div className={classes} style={lineStyle}>
                 <LineNumber number={number} highlight={highlight} onClick={onLineNumberClick} />
-                <LineContent number={number} formatPart={formatPart} data={data} onMouseUp={onMouseUp} />
+                <LineContent
+                    number={number}
+                    formatPart={formatPart}
+                    data={data}
+                    onMouseUp={onMouseUp}
+                    style={contentStyle}
+                />
             </div>
         );
     }
