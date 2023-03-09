@@ -1,4 +1,4 @@
-import { arrayOf, func, number, shape, string } from "prop-types";
+import { arrayOf, func, number, object, shape, string } from "prop-types";
 
 import React, { Component } from "react";
 
@@ -34,11 +34,12 @@ export default class LineContent extends Component<any, any> {
          */
         formatPart: func,
         onMouseUp: func,
-        style: {},
+        style: object,
     };
 
     static defaultProps = {
         formatPart: null,
+        style: null,
     };
 
     render() {

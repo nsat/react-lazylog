@@ -1,4 +1,4 @@
-import { func, shape, string } from "prop-types";
+import { func, object, shape, string } from "prop-types";
 
 import React, { Component } from "react";
 
@@ -51,7 +51,7 @@ export default class LinePart extends Component<any, any> {
          * return a new value to render for the part.
          */
         format: func,
-        style: {},
+        style: object,
     };
 
     static defaultProps = {
