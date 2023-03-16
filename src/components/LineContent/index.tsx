@@ -55,9 +55,10 @@ export default class LineContent extends Component<any, any> {
 
         return (
             <span className={lineContent} style={style} onMouseUp={onMouseUp}>
-                {data && data.map((part, n) => (
-                    <LinePart part={part} format={formatPart} key={`line-${number}-${n}`} style={style} />
-                ))}
+                {data &&
+                    data.map((part, n) => (
+                        <LinePart part={part} format={formatPart} key={`line-${number}-${n}`} style={style} />
+                    ))}
             </span>
         );
     }

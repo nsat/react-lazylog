@@ -418,8 +418,8 @@ export default class LazyLog extends Component<any, any> {
         }
     };
 
-    handleHighlight = (e) => {
-        const { onHighlight, enableMultilineHighlight } = this.props;
+    handleLineNumberClick = (e) => {
+        const { onLineNumberClick } = this.props;
         const { isFilteringLinesWithMatches } = this.state;
 
         if (!e.target.id) {
@@ -432,43 +432,19 @@ export default class LazyLog extends Component<any, any> {
             return;
         }
 
-        const first = this.state.highlight.first();
-        const last = this.state.highlight.last();
-        let range;
+        onLineNumberClick({ shiftKey: e.shiftKey, lineNumber });
 
-        if (first === lineNumber) {
-            range = null;
-        } else if (!e.shiftKey || !first) {
-            range = lineNumber;
-        } else if (enableMultilineHighlight && lineNumber > first) {
-            range = [first, lineNumber];
-        } else if (!enableMultilineHighlight && lineNumber > first) {
-            range = lineNumber;
-        } else {
-            range = [lineNumber, last];
-        }
-
-        const highlight = getHighlightRange(range);
-
-        const state = { highlight };
-
-        if (isFilteringLinesWithMatches) {
-            Object.assign(state, {
-                scrollToIndex: getScrollIndex({ scrollToLine: lineNumber }),
-            });
-        }
+        const state = isFilteringLinesWithMatches
+            ? {
+                  scrollToIndex: getScrollIndex({ scrollToLine: lineNumber }),
+              }
+            : {};
 
         this.setState(state, () => {
-            if (onHighlight) {
-                onHighlight(highlight);
-            }
-
             if (isFilteringLinesWithMatches) {
                 this.handleFilterLinesWithMatches(false);
             }
         });
-
-        return highlight;
     };
 
     handleScrollToLine(scrollToLine = 0) {
@@ -741,22 +717,11 @@ export default class LazyLog extends Component<any, any> {
     }
 
     renderRow = ({ key, index, style }) => {
-        const {
-            rowHeight,
-            selectableLines,
-            lineClassName,
-            highlightLineClassName,
-            onLineNumberClick,
-            onMouseUp,
-        } = this.props;
-        const {
-            highlight,
-            lines,
-            offset,
-            isFilteringLinesWithMatches,
-            filteredLines,
-            resultLineUniqueIndexes,
-        } = this.state;
+        const { rowHeight, selectableLines, lineClassName, highlightLineClassName, onMouseUp, highlight } =
+            this.props;
+        const { lines, offset, isFilteringLinesWithMatches, filteredLines, resultLineUniqueIndexes } =
+            this.state;
+
         const linesToRender = isFilteringLinesWithMatches ? filteredLines : lines;
         const number = isFilteringLinesWithMatches ? resultLineUniqueIndexes[index] : index + 1 + offset;
 
@@ -770,11 +735,8 @@ export default class LazyLog extends Component<any, any> {
                 number={number}
                 formatPart={this.handleFormatPart(number)}
                 selectable={selectableLines}
-                highlight={highlight.includes(number)}
-                onLineNumberClick={(e) => {
-                    const highlighted = this.handleHighlight(e);
-                    onLineNumberClick?.({ lineNumber: number, highlightRange: highlighted });
-                }}
+                highlight={getHighlightRange(highlight).includes(number)}
+                onLineNumberClick={this.handleLineNumberClick}
                 onMouseUp={onMouseUp?.(index + 1)}
                 data={ansiparse(decode(linesToRender.get(index)))}
             />
