@@ -5,9 +5,7 @@ import React, { Component } from "react";
 import { lineGutter } from "./index.module.css";
 
 /**
- * The line number of a single line.
- * The anchor contained within is interactive, and will highlight the
- * entire line upon selection.
+ * The gutter is an element between the line number and content.
  */
 export default class LineGutter extends Component<any, any> {
     static propTypes = {
