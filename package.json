@@ -1,13 +1,28 @@
 {
-    "name": "react-lazylog",
-    "version": "4.5.3",
+    "name": "@nsat/react-lazylog",
+    "version": "5.0.0",
     "description": "React Lazy Logviewer (Spire)",
     "license": "MPL-2.0",
     "repository": "nsat/react-lazylog",
-    "main": "build/index.js",
+    "type": "module",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "default": "./dist/index.js"
+        },
+        "./dist/index.css": "./dist/index.css",
+        "./styles.css": "./dist/index.css"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
     "files": [
-        "build",
-        "src"
+        "dist",
+        "src/lib"
     ],
     "keywords": [
         "react",
@@ -18,30 +33,44 @@
         "lazylog"
     ],
     "scripts": {
-        "build": "webpack --progress",
-        "dev": "styleguidist server"
+        "build": "tsc --noEmit && vite build",
+        "build:lib": "tsc --noEmit && vite build",
+        "build:demo": "vite build --mode demo",
+        "dev": "vite",
+        "preview": "vite preview",
+        "typecheck": "tsc --noEmit",
+        "test": "vitest run",
+        "test:watch": "vitest"
     },
     "devDependencies": {
-        "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
-        "@trivago/prettier-plugin-sort-imports": "^3.3.0",
-        "css-loader": "^6.5.1",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-styleguidist": "^11.1.7",
-        "ts-loader": "^9.2.6",
-        "webpack": "^5.60.0",
-        "webpack-cli": "^4.9.1"
+        "@microsoft/api-extractor": "^7.58.12",
+        "@tailwindcss/vite": "^4.3.3",
+        "@testing-library/jest-dom": "^7.0.1",
+        "@testing-library/react": "^16.3.2",
+        "@testing-library/user-event": "^14.6.5",
+        "@types/react": "^19.2.18",
+        "@types/react-dom": "^19.2.4",
+        "@vitejs/plugin-react": "^6.0.5",
+        "jsdom": "^30.0.1",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "tailwindcss": "^4.3.3",
+        "typescript": "^5.7.0",
+        "vite": "^8.2.1",
+        "vite-plugin-dts": "^5.0.3",
+        "vite-plugin-singlefile": "^2.3.3",
+        "vitest": "^4.1.11"
     },
     "dependencies": {
-        "hotkeys-js": "^3.8.7",
-        "immutable": "^4.0.0",
-        "mitt": "^3.0.0",
-        "prop-types": "^15.6.1",
-        "react-string-replace": "^0.4.1",
-        "react-virtualized": "^9.22.3",
-        "typescript": "^4.5.4"
+        "hotkeys-js": "^4.0.5",
+        "immutable": "^5.1.9",
+        "mitt": "^3.0.1",
+        "react-string-replace": "^2.0.1",
+        "react-virtualized-auto-sizer": "^2.0.3",
+        "react-window": "^2.3.0"
     },
     "peerDependencies": {
-        "react": ">=16.3.0"
+        "react": ">=18.0.0",
+        "react-dom": ">=18.0.0"
     }
 }

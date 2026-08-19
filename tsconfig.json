@@ -1,10 +1,26 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "target": "es6",
-    "lib": ["es2015", "dom", "dom.iterable"],
-    "sourceMap": true
-  }
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "declaration": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "types": ["vite/client"],
+    "paths": {
+      "@/*": ["./src/demo/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "dist-demo", "src/lib/__tests__"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
