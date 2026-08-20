@@ -1,0 +1,33 @@
+.bold { font-weight: bold; }
+.underline { text-decoration: underline; }
+.italic { font-style: italic; }
+
+.black { color: var(--lazylog-color-black, #485463); }
+.red { color: var(--lazylog-color-red, #c85a3d); }
+.green { color: var(--lazylog-color-green, #00806c); }
+.yellow { color: var(--lazylog-color-yellow, #c7904b); }
+.blue { color: var(--lazylog-color-blue, #2280c5); }
+.magenta { color: var(--lazylog-color-magenta, #80146e); }
+.cyan { color: var(--lazylog-color-cyan, #00adca); }
+.white { color: var(--lazylog-color-white, #f2f2f2); }
+.grey { color: var(--lazylog-color-grey, #6a7680); }
+
+.blackBold { color: var(--lazylog-color-black-bold, #6a7680); }
+.redBold { color: var(--lazylog-color-red-bold, #be0000); }
+.greenBold { color: var(--lazylog-color-green-bold, #00a88d); }
+.yellowBold { color: var(--lazylog-color-yellow-bold, #e0a860); }
+.blueBold { color: var(--lazylog-color-blue-bold, #3c9fe0); }
+.magentaBold { color: var(--lazylog-color-magenta-bold, #b02897); }
+.cyanBold { color: var(--lazylog-color-cyan-bold, #33c6dd); }
+.whiteBold { color: var(--lazylog-color-white-bold, #ffffff); }
+.greyBold { color: var(--lazylog-color-grey-bold, #aeb1b4); }
+
+.blackBg { background-color: var(--lazylog-bg-black, #485463); }
+.redBg { background-color: var(--lazylog-bg-red, #c85a3d); }
+.greenBg { background-color: var(--lazylog-bg-green, #00806c); }
+.yellowBg { background-color: var(--lazylog-bg-yellow, #c7904b); }
+.blueBg { background-color: var(--lazylog-bg-blue, #2280c5); }
+.magentaBg { background-color: var(--lazylog-bg-magenta, #80146e); }
+.cyanBg { background-color: var(--lazylog-bg-cyan, #00adca); }
+.whiteBg { background-color: var(--lazylog-bg-white, #f2f2f2); }
+.greyBg { background-color: var(--lazylog-bg-grey, #6a7680); }

@@ -1,0 +1,101 @@
+/*
+ * Default theme — Spire Dark background + BU color scheme.
+ *
+ * All colors are exposed as CSS custom properties on the root `.react-lazylog`
+ * element so they can be overridden by consumers without touching the internal
+ * class names. See the README ("Styling" > "Overriding colors") for details.
+ */
+.lazyLog {
+    /* Surface / base */
+    --lazylog-background: #04060f; /* Spire Dark */
+    --lazylog-color: #ffffff; /* Pure White */
+    --lazylog-line-number-color: #6a7680; /* Grey 2 */
+    --lazylog-line-number-highlight-color: #ffffff;
+    --lazylog-line-hover-background: #161a24;
+    --lazylog-line-highlight-background: #0f447a; /* Black Sapphire */
+    --lazylog-gutter-color: #aeb1b4; /* Grey 3 */
+
+    /* Text selection */
+    --lazylog-selection-background: #2280c5; /* Calypso Wave */
+    --lazylog-selection-color: #ffffff;
+
+    /* Search bar */
+    --lazylog-searchbar-background: #04060f; /* Spire Dark */
+    --lazylog-searchbar-color: #e2e2e2; /* Grey 5 */
+    --lazylog-searchbar-input-background: #161a24;
+    --lazylog-searchbar-input-border: #485463; /* Grey 1 */
+    --lazylog-searchbar-icon-active: #e2e2e2; /* Grey 5 */
+    --lazylog-searchbar-icon-inactive: #485463; /* Grey 1 */
+    --lazylog-searchbar-hover-background: #485463; /* Grey 1 */
+
+    /* Search matches */
+    --lazylog-search-match-background: #c7904b; /* Orbital Ochre */
+    --lazylog-search-match-color: #04060f; /* Spire Dark */
+    --lazylog-search-match-highlighted-background: #be0000; /* Spire Red */
+    --lazylog-search-match-highlighted-color: #ffffff;
+
+    /* ANSI foreground colors (BU palette) */
+    --lazylog-color-black: #485463; /* Grey 1 */
+    --lazylog-color-red: #c85a3d; /* Altitude Change */
+    --lazylog-color-green: #00806c; /* Mindful Green */
+    --lazylog-color-yellow: #c7904b; /* Orbital Ochre */
+    --lazylog-color-blue: #2280c5; /* Calypso Wave */
+    --lazylog-color-magenta: #80146e; /* Vast Violet */
+    --lazylog-color-cyan: #00adca; /* Equatorial Aqua */
+    --lazylog-color-white: #f2f2f2; /* Grey 6 */
+    --lazylog-color-grey: #6a7680; /* Grey 2 */
+
+    /* ANSI foreground colors — bold variants (brighter) */
+    --lazylog-color-black-bold: #6a7680; /* Grey 2 */
+    --lazylog-color-red-bold: #be0000; /* Spire Red */
+    --lazylog-color-green-bold: #00a88d;
+    --lazylog-color-yellow-bold: #e0a860;
+    --lazylog-color-blue-bold: #3c9fe0;
+    --lazylog-color-magenta-bold: #b02897;
+    --lazylog-color-cyan-bold: #33c6dd;
+    --lazylog-color-white-bold: #ffffff;
+    --lazylog-color-grey-bold: #aeb1b4; /* Grey 3 */
+
+    /* ANSI background colors (BU palette) */
+    --lazylog-bg-black: #485463; /* Grey 1 */
+    --lazylog-bg-red: #c85a3d; /* Altitude Change */
+    --lazylog-bg-green: #00806c; /* Mindful Green */
+    --lazylog-bg-yellow: #c7904b; /* Orbital Ochre */
+    --lazylog-bg-blue: #2280c5; /* Calypso Wave */
+    --lazylog-bg-magenta: #80146e; /* Vast Violet */
+    --lazylog-bg-cyan: #00adca; /* Equatorial Aqua */
+    --lazylog-bg-white: #f2f2f2; /* Grey 6 */
+    --lazylog-bg-grey: #6a7680; /* Grey 2 */
+
+    overflow: auto !important;
+    font-family: "Monaco", monospace;
+    font-size: 12px;
+    margin: 0;
+    white-space: pre;
+    background-color: var(--lazylog-background);
+    color: var(--lazylog-color);
+    font-weight: 400;
+    will-change: initial;
+    outline: none;
+}
+
+/* Text selection color within the log viewer (overrides the browser default). */
+.lazyLog ::selection {
+    background-color: var(--lazylog-selection-background);
+    color: var(--lazylog-selection-color);
+}
+
+.lazyLog ::-moz-selection {
+    background-color: var(--lazylog-selection-background);
+    color: var(--lazylog-selection-color);
+}
+
+.searchMatch {
+    background-color: var(--lazylog-search-match-background);
+    color: var(--lazylog-search-match-color);
+}
+
+.searchMatchHighlighted {
+    background-color: var(--lazylog-search-match-highlighted-background);
+    color: var(--lazylog-search-match-highlighted-color);
+}
