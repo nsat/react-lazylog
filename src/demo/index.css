@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/*
+ * Spire core brand palette (https://spire.com/brand-kit/colors/)
+ * Exposed as Tailwind theme tokens so utilities like `bg-spire-dark`,
+ * `text-spire-red`, `border-spire-grey-5`, etc. are available.
+ */
+@theme {
+    --color-spire-white: #ffffff;
+    --color-spire-dark: #04060f;
+    --color-spire-red: #be0000;
+
+    /* Light greys (Grey 5-7) */
+    --color-spire-grey-7: #fafafa;
+    --color-spire-grey-6: #f2f2f2;
+    --color-spire-grey-5: #e2e2e2;
+
+    /* Neutral greys (Grey 1-4) */
+    --color-spire-grey-1: #485463;
+    --color-spire-grey-2: #6a7680;
+    --color-spire-grey-3: #aeb1b4;
+    --color-spire-grey-4: #c6c7c8;
+
+    /* Slightly lifted surfaces derived from Spire Dark for the dark UI. */
+    --color-spire-surface: #0d1018;
+    --color-spire-surface-2: #161a24;
+}
+
+/*
+ * Tailwind v4's Preflight resets buttons to `cursor: default`. Show a pointer
+ * on hover for interactive buttons (disabled buttons keep the default cursor).
+ */
+button:not(:disabled) {
+    cursor: pointer;
+}
