@@ -18,6 +18,10 @@ This fork is maintained by a team at [Spire Global, Inc.](https://github.com/nsa
 -   Works in latest browser versions, including iOS Safari and Android Chrome
 -   v5+ requires React 18+
 
+## Demo
+
+A sample application demonstrating the library's capabilities can be found at: [https://nsat.github.io/react-lazylog/](https://nsat.github.io/react-lazylog/)
+
 ## Installation
 
 This package is published to the **GitHub Packages** registry under the `@nsat` scope.
@@ -28,9 +32,9 @@ to your project (or your user `~/.npmrc`):
 @nsat:registry=https://npm.pkg.github.com
 ```
 
-Then install the package alongside its React peer dependencies:
+Authenticate your NPM client with GitHub Packages using a personal access token by following [these](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-with-a-personal-access-token) instructions. I suggest using the CLI method to avoid storing your token in the `.npmrc` file. Once authenticated, install the package as you normally would:
 
-```bash
+```sh
 npm install @nsat/react-lazylog react react-dom
 ```
 
