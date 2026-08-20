@@ -1,0 +1,16 @@
+.line {
+  margin: 0;
+  user-select: none;
+}
+
+.line:hover {
+  background-color: var(--lazylog-line-hover-background, #161a24);
+}
+
+.lineHighlight {
+  background-color: var(--lazylog-line-highlight-background, #0f447a);
+}
+
+.lineSelectable {
+  user-select: text;
+}

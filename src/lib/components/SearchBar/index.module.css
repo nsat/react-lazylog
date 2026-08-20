@@ -1,0 +1,63 @@
+.searchBar {
+    /* Defaults mirror the LazyLog theme. Because the search bar renders as a
+     * sibling of the log list (not inside `.react-lazylog`), it declares its own
+     * custom properties so it can be themed independently or via a shared
+     * ancestor that sets these variables. */
+    --lazylog-searchbar-background: #04060f; /* Spire Dark */
+    --lazylog-searchbar-color: #e2e2e2; /* Grey 5 */
+    --lazylog-searchbar-input-background: #161a24;
+    --lazylog-searchbar-input-border: #485463; /* Grey 1 */
+    --lazylog-searchbar-icon-active: #e2e2e2; /* Grey 5 */
+    --lazylog-searchbar-icon-inactive: #485463; /* Grey 1 */
+    --lazylog-searchbar-icon-hover: #ffffff; /* Pure White */
+    --lazylog-searchbar-hover-background: #161a24;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-family: "Monaco", monospace;
+    font-size: 12px;
+    background-color: var(--lazylog-searchbar-background);
+    color: var(--lazylog-searchbar-color);
+    padding: 10px;
+}
+
+.searchInput {
+    background-color: var(--lazylog-searchbar-input-background);
+    color: var(--lazylog-searchbar-color);
+    height: 20px;
+    min-width: 200px;
+    font-size: 12px;
+    padding: 2px 5px;
+    border: 1px solid var(--lazylog-searchbar-input-border);
+    margin-right: 10px;
+}
+
+.active {
+    color: var(--lazylog-searchbar-icon-active);
+    fill: var(--lazylog-searchbar-icon-active);
+}
+
+.inactive {
+    color: var(--lazylog-searchbar-icon-inactive);
+    fill: var(--lazylog-searchbar-icon-inactive);
+}
+
+/* Keep the icon legible on hover regardless of its active/inactive color, and
+ * use a rounded rectangle (not a circle) for the hover background. */
+.clickable:hover {
+    border-radius: 5px;
+    background: var(--lazylog-searchbar-hover-background);
+    color: var(--lazylog-searchbar-icon-hover);
+    fill: var(--lazylog-searchbar-icon-hover);
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    margin-right: 10px;
+    padding: 3px 6px;
+}
